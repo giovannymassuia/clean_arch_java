@@ -34,8 +34,8 @@ public class PlaceOrder {
             Optional<Item> optionalItem = this.items.stream().filter(i -> i.getId().equals(inputItem.getItemId())).findAny();
             if (optionalItem.isEmpty()) throw new IllegalStateException("Item not found");
             order.addItem(optionalItem.get().getId(), optionalItem.get().getPrice(), inputItem.getQuantity());
-            order.setFreight(order.getFreight().add(
-                    BigDecimal.valueOf(FreightCalculator.calculate(distance.doubleValue(), optionalItem.get()))
+            order.setFreight(order.getFreight()
+                    .add(FreightCalculator.calculate(distance, optionalItem.get())
                             .multiply(BigDecimal.valueOf(inputItem.getQuantity()))));
         });
 

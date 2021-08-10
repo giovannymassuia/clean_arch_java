@@ -21,7 +21,7 @@ class PlaceOrderTest {
 
         PlaceOrder placeOrder = new PlaceOrder();
         PlaceOrderOutput output = placeOrder.execute(input);
-        assertThat(output.getTotal()).isEqualTo(BigDecimal.valueOf(5982d));
+        assertThat(output.getTotal()).isEqualByComparingTo(BigDecimal.valueOf(5982));
     }
 
     @Test
@@ -37,7 +37,7 @@ class PlaceOrderTest {
 
         PlaceOrder placeOrder = new PlaceOrder();
         PlaceOrderOutput output = placeOrder.execute(input);
-        assertThat(output.getTotal()).isEqualTo(BigDecimal.valueOf(7400d));
+        assertThat(output.getTotal()).isEqualByComparingTo(BigDecimal.valueOf(7400));
     }
 
     @Test
@@ -53,7 +53,7 @@ class PlaceOrderTest {
 
         PlaceOrder placeOrder = new PlaceOrder();
         PlaceOrderOutput output = placeOrder.execute(input);
-        assertThat(output.getFreight()).isEqualTo(BigDecimal.valueOf(310d));
+        assertThat(output.getFreight()).isEqualByComparingTo(BigDecimal.valueOf(310));
     }
 
 }
