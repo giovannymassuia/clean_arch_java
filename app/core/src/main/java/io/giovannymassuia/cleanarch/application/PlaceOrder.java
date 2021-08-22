@@ -1,3 +1,11 @@
+package io.giovannymassuia.cleanarch.application;
+
+import io.giovannymassuia.cleanarch.domain.entity.Coupon;
+import io.giovannymassuia.cleanarch.domain.entity.Item;
+import io.giovannymassuia.cleanarch.domain.entity.Order;
+import io.giovannymassuia.cleanarch.domain.gateway.ZipCodeCalculatorAPI;
+import io.giovannymassuia.cleanarch.domain.service.FreightCalculator;
+import io.giovannymassuia.cleanarch.fakes.ZipCodeCalculatorAPIMemory;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -32,7 +40,8 @@ public class PlaceOrder {
 
         input.getItems().forEach(inputItem -> {
             Optional<Item> optionalItem = this.items.stream().filter(i -> i.getId().equals(inputItem.getItemId())).findAny();
-            if (optionalItem.isEmpty()) throw new IllegalStateException("Item not found");
+            if (optionalItem.isEmpty())
+                throw new IllegalStateException("io.giovannymassuia.cleanarch.domain.entity.Item not found");
             order.addItem(optionalItem.get().getId(), optionalItem.get().getPrice(), inputItem.getQuantity());
             order.setFreight(order.getFreight()
                     .add(FreightCalculator.calculate(distance, optionalItem.get())

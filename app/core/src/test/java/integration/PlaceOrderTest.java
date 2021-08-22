@@ -1,3 +1,8 @@
+package integration;
+
+import io.giovannymassuia.cleanarch.application.PlaceOrder;
+import io.giovannymassuia.cleanarch.application.PlaceOrderInput;
+import io.giovannymassuia.cleanarch.application.PlaceOrderOutput;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,3 +1,5 @@
+package io.giovannymassuia.cleanarch.application;
+
 import java.util.List;
 
 public class PlaceOrderInput {

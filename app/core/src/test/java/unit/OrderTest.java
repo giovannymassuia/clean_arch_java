@@ -1,3 +1,7 @@
+package unit;
+
+import io.giovannymassuia.cleanarch.domain.entity.Coupon;
+import io.giovannymassuia.cleanarch.domain.entity.Order;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

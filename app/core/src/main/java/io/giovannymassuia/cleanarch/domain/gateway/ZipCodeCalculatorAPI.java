@@ -1,3 +1,5 @@
+package io.giovannymassuia.cleanarch.domain.gateway;
+
 import java.math.BigDecimal;
 
 public interface ZipCodeCalculatorAPI {

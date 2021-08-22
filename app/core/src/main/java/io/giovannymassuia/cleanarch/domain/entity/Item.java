@@ -1,3 +1,5 @@
+package io.giovannymassuia.cleanarch.domain.entity;
+
 import java.math.BigDecimal;
 
 public class Item {

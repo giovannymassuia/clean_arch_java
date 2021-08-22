@@ -1,3 +1,5 @@
+package io.giovannymassuia.cleanarch.application;
+
 import java.math.BigDecimal;
 
 public class PlaceOrderOutput {

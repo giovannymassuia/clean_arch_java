@@ -1,3 +1,7 @@
+package io.giovannymassuia.cleanarch.domain.service;
+
+import io.giovannymassuia.cleanarch.domain.entity.Item;
+
 import java.math.BigDecimal;
 
 public class FreightCalculator {
