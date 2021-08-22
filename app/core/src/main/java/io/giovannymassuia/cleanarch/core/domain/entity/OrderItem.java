@@ -18,4 +18,15 @@ public class OrderItem {
         return this.price.multiply(BigDecimal.valueOf(quantity));
     }
 
+    public String getItemId() {
+        return itemId;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
 }

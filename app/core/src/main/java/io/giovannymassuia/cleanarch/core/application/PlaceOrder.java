@@ -2,6 +2,7 @@ package io.giovannymassuia.cleanarch.core.application;
 
 import io.giovannymassuia.cleanarch.core.domain.entity.Item;
 import io.giovannymassuia.cleanarch.core.domain.entity.Order;
+import io.giovannymassuia.cleanarch.core.domain.factory.RepositoryFactory;
 import io.giovannymassuia.cleanarch.core.domain.gateway.ZipCodeCalculatorAPI;
 import io.giovannymassuia.cleanarch.core.domain.repository.CouponRepository;
 import io.giovannymassuia.cleanarch.core.domain.repository.ItemRepository;
@@ -18,15 +19,16 @@ public class PlaceOrder {
     private final ItemRepository itemRepository;
     private final ZipCodeCalculatorAPI zipCodeCalculatorAPI;
 
-    public PlaceOrder(OrderRepository orderRepository, CouponRepository couponRepository, ItemRepository itemRepository, ZipCodeCalculatorAPI zipCodeCalculatorAPI) {
-        this.orderRepository = orderRepository;
-        this.couponRepository = couponRepository;
-        this.itemRepository = itemRepository;
+    public PlaceOrder(RepositoryFactory repositoryFactory, ZipCodeCalculatorAPI zipCodeCalculatorAPI) {
+        this.orderRepository = repositoryFactory.getOrderRepository();
+        this.couponRepository = repositoryFactory.getCouponRepository();
+        this.itemRepository = repositoryFactory.getItemRepository();
         this.zipCodeCalculatorAPI = zipCodeCalculatorAPI;
     }
 
     public PlaceOrderOutput execute(PlaceOrderInput input) {
-        Order order = new Order(input.cpf());
+        Integer sequence = this.orderRepository.count() + 1;
+        Order order = new Order(input.cpf(), input.issueDate(), sequence);
         BigDecimal distance = this.zipCodeCalculatorAPI.calculate(input.zipcode(), "99.999-99");
 
         input.items().forEach(inputItem -> {
@@ -44,7 +46,7 @@ public class PlaceOrder {
 
         this.orderRepository.save(order);
 
-        return new PlaceOrderOutput(order.getFreight(), order.getTotal());
+        return new PlaceOrderOutput(order.getFreight(), order.getTotal(), order.getCode().getValue());
     }
 
 }

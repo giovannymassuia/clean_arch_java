@@ -3,15 +3,15 @@ package integration;
 import io.giovannymassuia.cleanarch.core.application.PlaceOrder;
 import io.giovannymassuia.cleanarch.core.application.PlaceOrderInput;
 import io.giovannymassuia.cleanarch.core.application.PlaceOrderOutput;
+import io.giovannymassuia.cleanarch.infra.factory.MemoryRepositoryFactory;
 import io.giovannymassuia.cleanarch.infra.gateway.memory.ZipCodeCalculatorAPIMemory;
-import io.giovannymassuia.cleanarch.infra.repository.memory.CouponRepositoryMemory;
-import io.giovannymassuia.cleanarch.infra.repository.memory.ItemRepositoryMemory;
-import io.giovannymassuia.cleanarch.infra.repository.memory.OrderRepositoryMemory;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,7 +22,12 @@ class PlaceOrderMemoryTest {
 
     @BeforeEach
     void setUp() {
-        placeOrder = new PlaceOrder(new OrderRepositoryMemory(), new CouponRepositoryMemory(), new ItemRepositoryMemory(), new ZipCodeCalculatorAPIMemory());
+        placeOrder = new PlaceOrder(MemoryRepositoryFactory.getInstance(), new ZipCodeCalculatorAPIMemory());
+    }
+
+    @AfterEach
+    void tearDown() {
+        MemoryRepositoryFactory.getInstance().getOrderRepository().clean();
     }
 
     @Test
@@ -68,6 +73,23 @@ class PlaceOrderMemoryTest {
 
         PlaceOrderOutput output = placeOrder.execute(input);
         assertThat(output.freight()).isEqualByComparingTo(BigDecimal.valueOf(310));
+    }
+
+    @Test
+    @DisplayName("Should place an order with correct code")
+    public void placeOrderWithCode() {
+        PlaceOrderInput input = new PlaceOrderInput(
+                "778.278.412-36",
+                "11.111-11",
+                List.of(new PlaceOrderInput.Item("1", 2),
+                        new PlaceOrderInput.Item("2", 1),
+                        new PlaceOrderInput.Item("3", 3)),
+                "VALE20_EXPIRED",
+                LocalDate.of(2020, 10, 10));
+
+        placeOrder.execute(input);
+        PlaceOrderOutput output = placeOrder.execute(input);
+        assertThat(output.code()).isEqualTo("202000000002");
     }
 
 }
