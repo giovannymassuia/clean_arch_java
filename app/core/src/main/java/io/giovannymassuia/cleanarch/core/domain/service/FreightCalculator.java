@@ -1,6 +1,6 @@
-package io.giovannymassuia.cleanarch.domain.service;
+package io.giovannymassuia.cleanarch.core.domain.service;
 
-import io.giovannymassuia.cleanarch.domain.entity.Item;
+import io.giovannymassuia.cleanarch.core.domain.entity.Item;
 
 import java.math.BigDecimal;
 

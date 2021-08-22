@@ -1,4 +1,4 @@
-package io.giovannymassuia.cleanarch.domain.entity;
+package io.giovannymassuia.cleanarch.core.domain.entity;
 
 import java.util.Arrays;
 import java.util.List;

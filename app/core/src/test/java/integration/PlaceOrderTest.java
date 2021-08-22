@@ -1,8 +1,13 @@
 package integration;
 
-import io.giovannymassuia.cleanarch.application.PlaceOrder;
-import io.giovannymassuia.cleanarch.application.PlaceOrderInput;
-import io.giovannymassuia.cleanarch.application.PlaceOrderOutput;
+import fake.gateway.ZipCodeCalculatorAPIFake;
+import fake.repository.CouponRepositoryFake;
+import fake.repository.ItemRepositoryFake;
+import fake.repository.OrderRepositoryFake;
+import io.giovannymassuia.cleanarch.core.application.PlaceOrder;
+import io.giovannymassuia.cleanarch.core.application.PlaceOrderInput;
+import io.giovannymassuia.cleanarch.core.application.PlaceOrderOutput;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +17,13 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PlaceOrderTest {
+
+    PlaceOrder placeOrder;
+
+    @BeforeEach
+    void setUp() {
+        placeOrder = new PlaceOrder(new OrderRepositoryFake(), new CouponRepositoryFake(), new ItemRepositoryFake(), new ZipCodeCalculatorAPIFake());
+    }
 
     @Test
     @DisplayName("Should place an order")
@@ -24,9 +36,8 @@ class PlaceOrderTest {
                         new PlaceOrderInput.Item("3", 3)),
                 "VALE20");
 
-        PlaceOrder placeOrder = new PlaceOrder();
         PlaceOrderOutput output = placeOrder.execute(input);
-        assertThat(output.getTotal()).isEqualByComparingTo(BigDecimal.valueOf(5982));
+        assertThat(output.total()).isEqualByComparingTo(BigDecimal.valueOf(5982));
     }
 
     @Test
@@ -40,9 +51,8 @@ class PlaceOrderTest {
                         new PlaceOrderInput.Item("3", 3)),
                 "VALE20_EXPIRED");
 
-        PlaceOrder placeOrder = new PlaceOrder();
         PlaceOrderOutput output = placeOrder.execute(input);
-        assertThat(output.getTotal()).isEqualByComparingTo(BigDecimal.valueOf(7400));
+        assertThat(output.total()).isEqualByComparingTo(BigDecimal.valueOf(7400));
     }
 
     @Test
@@ -56,9 +66,8 @@ class PlaceOrderTest {
                         new PlaceOrderInput.Item("3", 3)),
                 "VALE20_EXPIRED");
 
-        PlaceOrder placeOrder = new PlaceOrder();
         PlaceOrderOutput output = placeOrder.execute(input);
-        assertThat(output.getFreight()).isEqualByComparingTo(BigDecimal.valueOf(310));
+        assertThat(output.freight()).isEqualByComparingTo(BigDecimal.valueOf(310));
     }
 
 }

@@ -1,6 +1,6 @@
 package unit;
 
-import io.giovannymassuia.cleanarch.domain.entity.Item;
+import io.giovannymassuia.cleanarch.core.domain.entity.Item;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

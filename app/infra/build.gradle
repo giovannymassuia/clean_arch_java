@@ -5,7 +5,7 @@ plugins {
     id 'com.adarshr.test-logger' version '3.0.0'
 }
 
-group 'io.giovannymassuia.cleanarch.core'
+group 'io.giovannymassuia.cleanarch.infra'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -13,6 +13,8 @@ repositories {
 }
 
 dependencies {
+    implementation project(":core")
+
     implementation 'org.apache.commons:commons-lang3:3.12.0'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'

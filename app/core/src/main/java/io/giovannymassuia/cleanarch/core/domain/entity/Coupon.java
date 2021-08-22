@@ -1,4 +1,4 @@
-package io.giovannymassuia.cleanarch.domain.entity;
+package io.giovannymassuia.cleanarch.core.domain.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

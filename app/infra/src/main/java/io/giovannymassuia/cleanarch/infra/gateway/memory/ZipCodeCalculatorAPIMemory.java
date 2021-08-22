@@ -1,6 +1,6 @@
-package io.giovannymassuia.cleanarch.fakes;
+package io.giovannymassuia.cleanarch.infra.gateway.memory;
 
-import io.giovannymassuia.cleanarch.domain.gateway.ZipCodeCalculatorAPI;
+import io.giovannymassuia.cleanarch.core.domain.gateway.ZipCodeCalculatorAPI;
 
 import java.math.BigDecimal;
 

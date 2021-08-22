@@ -1,4 +1,4 @@
-package io.giovannymassuia.cleanarch.domain.gateway;
+package io.giovannymassuia.cleanarch.core.domain.gateway;
 
 import java.math.BigDecimal;
 
