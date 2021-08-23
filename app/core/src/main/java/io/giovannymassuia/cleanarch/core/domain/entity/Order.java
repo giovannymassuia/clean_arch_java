@@ -68,4 +68,20 @@ public class Order {
     public List<OrderItem> getItems() {
         return items;
     }
+
+    public Optional<Coupon> getCoupon() {
+        return coupon;
+    }
+
+    public Cpf getCpf() {
+        return cpf;
+    }
+
+    public LocalDate getIssueDate() {
+        return issueDate;
+    }
+
+    public Integer getSequence() {
+        return sequence;
+    }
 }

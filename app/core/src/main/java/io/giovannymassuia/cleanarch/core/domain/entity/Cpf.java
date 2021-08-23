@@ -58,4 +58,7 @@ public class Cpf {
         return cpf.substring(9);
     }
 
+    public String getValue() {
+        return value;
+    }
 }

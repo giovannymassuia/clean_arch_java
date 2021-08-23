@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ItemTest {
 
     @Test
-    @DisplayName("Should calculate the volume of the io.giovannymassuia.cleanarch.domain.entity.Item")
+    @DisplayName("Should calculate the volume of the Item")
     public void testCalculateItemVolume1() {
 
         Item item = new Item("1", "Amplificador", BigDecimal.valueOf(5000), 50, 50, 50, 22);
@@ -20,7 +20,7 @@ class ItemTest {
     }
 
     @Test
-    @DisplayName("Should calculate the density of the io.giovannymassuia.cleanarch.domain.entity.Item")
+    @DisplayName("Should calculate the density of the Item")
     public void testCalculateItemDensity() {
         Item item = new Item("1", "Amplificador", BigDecimal.valueOf(5000), 50, 50, 50, 22);
         double density = item.getDensity();

@@ -1,12 +1,22 @@
 package io.giovannymassuia.cleanarch.infra.database;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface Database {
 
-    List<Object> many(String query, Object[] parameters);
+    record DatabaseProperties(String url, String username, String password) {
+    }
 
-    Optional<Object> one(String query, Object[] parameters);
+    List<Map<String, Object>>
+
+    queryMany(String query, Map<String, Object> parameters);
+
+    Optional<Map<String, Object>> queryOne(String query, Map<String, Object> parameters);
+
+    int execute(String query, Map<String, Object> parameters);
+
+    Optional<Map<String, Object>> insertAndReturnGeneratedKey(String query, Map<String, Object> parameters, String generatedKeyColumnName);
 
 }
